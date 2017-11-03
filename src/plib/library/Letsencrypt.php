@@ -56,7 +56,7 @@ class Modules_SecurityAdvisor_Letsencrypt
         }
         $options[] = '--non-interactive';
 
-        $result = pm_ApiCli::callSbin('letsencrypt.sh', $options, pm_ApiCli::RESULT_FULL);
+        $result = pm_ApiCli::callSbin(\pm_ProductInfo::isUnix() ? 'letsencrypt.sh' : 'letsencrypt.bat', $options, pm_ApiCli::RESULT_FULL);
         if ($result['code']) {
             throw new pm_Exception("{$result['stdout']}\n{$result['stderr']}");
         }
